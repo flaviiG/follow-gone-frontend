@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const baseUrl = import.meta.env.VITE_API_URL;
+const baseUrl = 'https://follow-gone-api.onrender.com';
 
 export async function getUser() {
   try {
