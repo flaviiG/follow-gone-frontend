@@ -1,7 +1,6 @@
 import axios from 'axios';
 
-// eslint-disable-next-line no-undef
-const baseUrl = process.env.API_URL;
+const baseUrl = import.meta.env.VITE_API_URL;
 
 export async function getUser() {
   try {
