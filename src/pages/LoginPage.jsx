@@ -4,6 +4,7 @@ import { Navigate, useNavigate } from 'react-router-dom';
 import { useAuth } from '../provider/authProvider';
 import Spinner from '../ui/Spinner';
 import Button from '../ui/Button';
+import toast from 'react-hot-toast';
 
 function LoginPage() {
   const [email, setEmail] = useState('');
@@ -26,10 +27,11 @@ function LoginPage() {
       const { token, user } = await loginApi(email, password);
       setToken(token);
       setUser(user);
+      toast.success('Logged in!');
 
       navigate('/app');
     } catch (err) {
-      console.log(err);
+      toast.error(err.response.data.message);
     } finally {
       setIsLoading(false);
     }

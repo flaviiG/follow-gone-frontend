@@ -7,6 +7,7 @@ import AppLayout from './ui/AppLayout';
 import ProfilePage from './pages/ProfilePage';
 import GetFollowersPage from './pages/GetFollowersPage';
 import AuthProvider from './provider/authProvider';
+import { Toaster } from 'react-hot-toast';
 
 function App() {
   return (
@@ -26,6 +27,19 @@ function App() {
           </Route>
         </Routes>
       </BrowserRouter>
+      <Toaster
+        position="top-center"
+        gutter={12}
+        containerStyle={{ margin: '8px' }}
+        toastOptions={{
+          success: {
+            duration: 3000,
+          },
+          error: {
+            duration: 5000,
+          },
+        }}
+      />
     </AuthProvider>
   );
 }

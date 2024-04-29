@@ -2,6 +2,7 @@
 import axios from 'axios';
 import { createContext, useContext, useEffect, useMemo, useState } from 'react';
 import { getUser } from '../services/userApi';
+import toast from 'react-hot-toast';
 
 const AuthContext = createContext();
 
@@ -16,9 +17,15 @@ function AuthProvider({ children }) {
     } else {
       delete axios.defaults.headers.common['Authorization'];
       localStorage.removeItem('jwt-gone');
+      return;
     }
     if (!user) {
-      getUser().then((user) => setUser(user));
+      getUser()
+        .then((user) => setUser(user))
+        .catch((err) => {
+          toast.error(err.message);
+          localStorage.removeItem('jwt-gone');
+        });
     }
   }, [token, user]);
 

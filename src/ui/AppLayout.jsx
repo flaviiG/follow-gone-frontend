@@ -4,14 +4,16 @@ import ProtectedRoute from './ProtectedRoute';
 
 function AppLayout() {
   return (
-    <ProtectedRoute>
-      <div className="h-screen overflow-hidden bg-slate-900">
-        <AppNavBar />
-        <div className="h-[calc(100vh-83px-1.75rem)]">
-          <Outlet />
+    <>
+      <ProtectedRoute>
+        <div className="h-screen overflow-hidden bg-slate-900">
+          <AppNavBar />
+          <div className="h-[calc(100vh-83px-1.75rem)]">
+            <Outlet />
+          </div>
         </div>
-      </div>
-    </ProtectedRoute>
+      </ProtectedRoute>
+    </>
   );
 }
 

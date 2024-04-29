@@ -1,8 +1,11 @@
 import axios from 'axios';
 
+// eslint-disable-next-line no-undef
+const baseUrl = process.env.API_URL;
+
 export async function login(email, password) {
   const response = await axios.post(
-    'https://follow-gone-api.onrender.com/api/v1/users/login',
+    `${baseUrl}/api/v1/users/login`,
     {
       email,
       password,
@@ -24,7 +27,7 @@ export async function login(email, password) {
 export async function signup(newUser) {
   const { email, password, passwordConfirm, instagramUsername } = newUser;
   const response = await axios.post(
-    'https://follow-gone-api.onrender.com/api/v1/users/signup',
+    `${baseUrl}/api/v1/users/signup`,
     {
       email,
       password,

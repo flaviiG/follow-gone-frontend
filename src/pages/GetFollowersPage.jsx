@@ -6,6 +6,7 @@ import {
   updateUnfollowers,
 } from '../services/userApi';
 import { useState } from 'react';
+import toast from 'react-hot-toast';
 
 function GetFollowersPage() {
   const { user, setUser } = useAuth();
@@ -42,14 +43,14 @@ function GetFollowersPage() {
       });
 
       await updateUnfollowers(unfollowers);
-
+      toast.success('Updated lists!');
       setUser({
         ...user,
         followerList: newFollowersList,
         unfollowList: unfollowers,
       });
     } catch (err) {
-      console.log(err);
+      toast.error(err.response.data.message);
     } finally {
       setIsLoading(false);
     }

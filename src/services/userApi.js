@@ -1,21 +1,22 @@
 import axios from 'axios';
 
+// eslint-disable-next-line no-undef
+const baseUrl = process.env.API_URL;
+
 export async function getUser() {
-  const response = await axios.get(
-    'https://follow-gone-api.onrender.com/api/v1/users/getUser'
-  );
+  try {
+    const response = await axios.get(`${baseUrl}/api/v1/users/getUser`);
 
-  const data = response.data;
+    const data = response.data;
 
-  if (data.status !== 'success') throw new Error(data.message);
-
-  return data.data.user;
+    return data.data.user;
+  } catch (err) {
+    throw new Error(err.response.data.message);
+  }
 }
 
 export async function getFollowers() {
-  const response = await axios.get(
-    'https://follow-gone-api.onrender.com/api/v1/users/getFollowers'
-  );
+  const response = await axios.get(`${baseUrl}/api/v1/users/getFollowers`);
 
   const data = response.data;
 
@@ -26,7 +27,7 @@ export async function getFollowers() {
 
 export async function updateUnfollowers(unfollowList) {
   const response = await axios.patch(
-    'https://follow-gone-api.onrender.com/api/v1/users/unfollowers',
+    `${baseUrl}/api/v1/users/unfollowers`,
     {
       unfollowList,
     },

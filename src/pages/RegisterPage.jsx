@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import { signup as signupApi } from '../services/authApi';
 import Spinner from '../ui/Spinner';
 import Button from '../ui/Button';
+import toast from 'react-hot-toast';
 
 function RegisterPage() {
   const [email, setEmail] = useState('');
@@ -26,10 +27,10 @@ function RegisterPage() {
       const { token, user } = await signupApi(newUser);
       setToken(token);
       setUser(user);
-
+      toast.success('You are registered!');
       navigate('/app');
     } catch (err) {
-      console.log(err);
+      toast.error(err.response.data.message);
     } finally {
       setIsLoading(false);
     }
